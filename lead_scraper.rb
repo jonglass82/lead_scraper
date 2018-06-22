@@ -5,7 +5,7 @@ require 'erb'
 puts "running scraper ..."
 
 
-url = 
+url = ""
 
 puts data = Nokogiri::HTML(open(url))
 
