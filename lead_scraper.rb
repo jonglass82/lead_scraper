@@ -48,9 +48,7 @@ end
     
 #end
 
-#AIzaSyBQBiu4yjuFTvp0A74JCTtxGoUdELKhhWI
-#
-#GET https://www.googleapis.com/customsearch/v1?key=AIzaSyBQBiu4yjuFTvp0A74JCTtxGoUdELKhhWI&cx=017576662512468239146:omuauf_lfve&q=lectures
+
 
 
 
