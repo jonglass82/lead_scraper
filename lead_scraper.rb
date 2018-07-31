@@ -10,44 +10,69 @@ class Scraper
     def initialize 
         
         puts "Please enter a zip code to search ..."
-
+        
         zip_code = gets.chomp
+        
+        puts "what type of studios would you like to search?"
+        
+        search_type = gets.chomp
 
-        url = "https://www.yogafinder.com/yoga.cfm?Yogacity=" + zip_code.to_s
+        url = "https://www.yellowpages.com/search?search_terms=" + search_type + "+studio&geo_location_terms=" + zip_code.to_s 
          
         @data = Nokogiri::HTML(open(url))
 
     end
     
-    def studio_info
-         data.css('.insidetext').children.map{|t|t.text}.each_slice(2).to_a
-    end
     
+def names
+    @name = data.css('.business-name').map{|n|n.text}
 end
+    
 
+def addresses
+    @address = data.css('.adr').map{|a|a.text}
+end
+    
+
+def phone_numbers
+    @phone = data.css('.phones').map{|a|a.text}
+end
+    
 
 scraper = Scraper.new
 
-puts scraper.studio_info
+names = scraper.names
 
+addresses = scraper.addresses
+    
+phone_numbers = scraper.phone_numbers
 
+   
+(0...names.length).each do |x|
+    
+    puts "- - - - - - - - - - - - - -"
 
-        
-#def create_csv
+    puts "#{names[x]} | #{addresses[x]} | #{phone_numbers[x]}"
 
-CSV.open("data.csv", "w") do |data|
-       #data << ['NAME', 'ADDRESS','PHONE']
-        
-        scraper.studio_info.each do |row|
-            data << [row]
-            #data << [""]
-        end
-        
-        
+end
+
+       
+#EXPORT TO CSV FILE
+
+CSV.open("data.csv", "w") do |csv|
+       
+    csv << ["NAME", "ADDRESS","PHONE", "WEBSITE", "DECISION MAKER"]
+    
+    (0...names.length).each do |x|
+    
+        csv << ["#{names[x]}","#{addresses[x]}","#{phone_numbers[x]}"]
+    
 end
     
-#end
+end
 
+
+end
 
 
 
