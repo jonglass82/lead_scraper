@@ -61,7 +61,7 @@ end
 
 CSV.open("data.csv", "w") do |csv|
        
-    csv << ["NAME", "ADDRESS","PHONE", "WEBSITE", "DECISION MAKER"]
+    csv << ["NAME", "ADDRESS","PHONE", "WEBSITE", "DECISION MAKER", "NOTES"]
     
     (0...names.length).each do |x|
     
