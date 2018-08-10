@@ -26,14 +26,53 @@ def description
 end
     
 def company_name
+    @company_name = data.css('.sale-row__listed-by').map{|x|x.text}
 end
     
 def address
+    @address = data.css('.sale-row__address').map{|x|x.text}
 end
     
 def date
+    data.css('.sale-row__all-dates__date').map{|x|x.text}
+end
+
+
+end
+
+
+finder = Finder.new
+
+descriptions = finder.description
+
+company_names = finder.company_name
+
+addresses = finder.address
+
+dates = finder.date
+
+
+(0..company_names.length).each do |x|
+
+      puts "- - - - - - - - - - - - - -"
+
+    puts "#{descriptions[x]} | #{company_names[x]} | #{addresses[x]} | #{dates[x]}"
+
+
 end
 
 
 
-end
+
+
+
+
+#CSV.open("data.csv", "w") do |csv|
+#       
+#    csv << ["NAME", "ADDRESS","PHONE", "WEBSITE", "DECISION MAKER", "NOTES"]
+#    
+#    (0...names.length).each do |x|
+#    
+#        csv << ["#{names[x]}","#{addresses[x]}","#{phone_numbers[x]}"]
+#    
+#end
